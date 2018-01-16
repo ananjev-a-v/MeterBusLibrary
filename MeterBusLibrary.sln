@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterBusLibrary", "MeterBusLibrary\MeterBusLibrary.csproj", "{5E4C2B3A-EC67-40AF-987C-F8A8C72E997D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElfConsoleApplication", "ElfConsoleApplication\ElfConsoleApplication.csproj", "{35410508-B7FD-45B1-8E2D-76C311B2130A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataExamples", "DataExamples", "{C960B35E-8CDD-4B0F-A232-B91C8411007C}"
+	ProjectSection(SolutionItems) = preProject
+		DataExamples\ValuesFromDevices.txt = DataExamples\ValuesFromDevices.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{0590D187-9A46-4955-8380-22C4D71FC3EC}"
+	ProjectSection(SolutionItems) = preProject
+		DataExamples\Docs\M-Bus.txt = DataExamples\Docs\M-Bus.txt
+		DataExamples\Docs\MBDOC48.PDF = DataExamples\Docs\MBDOC48.PDF
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E4C2B3A-EC67-40AF-987C-F8A8C72E997D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E4C2B3A-EC67-40AF-987C-F8A8C72E997D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E4C2B3A-EC67-40AF-987C-F8A8C72E997D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E4C2B3A-EC67-40AF-987C-F8A8C72E997D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35410508-B7FD-45B1-8E2D-76C311B2130A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35410508-B7FD-45B1-8E2D-76C311B2130A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35410508-B7FD-45B1-8E2D-76C311B2130A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35410508-B7FD-45B1-8E2D-76C311B2130A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0590D187-9A46-4955-8380-22C4D71FC3EC} = {C960B35E-8CDD-4B0F-A232-B91C8411007C}
+	EndGlobalSection
+EndGlobal

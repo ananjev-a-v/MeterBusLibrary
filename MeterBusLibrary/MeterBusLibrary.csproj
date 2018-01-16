@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5E4C2B3A-EC67-40AF-987C-F8A8C72E997D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MeterBusLibrary</RootNamespace>
+    <AssemblyName>MeterBusLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\DataTypes.cs" />
+    <Compile Include="Domain\DIF.cs" />
+    <Compile Include="Domain\DIFE.cs" />
+    <Compile Include="Domain\DurationMagnitudes.cs" />
+    <Compile Include="Domain\Functions.cs" />
+    <Compile Include="Domain\MediumFixedData.cs" />
+    <Compile Include="Domain\TimeMagnitudes.cs" />
+    <Compile Include="Domain\UnitsFixedData.cs" />
+    <Compile Include="Domain\UnitsVariableData.cs" />
+    <Compile Include="Domain\VIF.cs" />
+    <Compile Include="Domain\VIFE.cs" />
+    <Compile Include="Domain\VIFE_FD.cs" />
+    <Compile Include="Domain\VIFE_FB.cs" />
+    <Compile Include="Helpers\BCD.cs" />
+    <Compile Include="Helpers\VariableLengthData.cs" />
+    <Compile Include="ResponseMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MeterBusStream.cs" />
+    <Compile Include="ResponseCodes.cs" />
+    <Compile Include="Responses\AlarmStatus.cs" />
+    <Compile Include="Responses\ApplicationError.cs" />
+    <Compile Include="Responses\Base.cs" />
+    <Compile Include="Responses\Empty.cs" />
+    <Compile Include="Responses\FixedData.cs" />
+    <Compile Include="Responses\VariableData.cs" />
+    <Compile Include="Responses\_UD_Base.cs" />
+    <Compile Include="Responses\_UD_Data.cs" />
+    <Compile Include="SettingsSerial.cs" />
+    <Compile Include="Settings.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
