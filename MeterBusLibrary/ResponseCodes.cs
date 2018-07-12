@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MeterBusLibrary
 {
-    enum ResponseCodes : byte
+    internal enum ResponseCodes : byte
     {
         ACK = 0xE5,
         LONG_FRAME = 0x68,

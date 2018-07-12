@@ -30,9 +30,13 @@ namespace MeterBusLibrary.Domain
         }
 
         public VIFTypes VIFType { get; }
+
         public bool Extension { get; }
+
         public UnitsVariableData Units { get; }
+
         public int Magnitude { get; }
+
         public string VIF_string { get; }
 
         public VIF(BinaryReader source)

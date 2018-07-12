@@ -6,5 +6,7 @@ using System.Text;
 namespace MeterBusLibrary.Responses
 {
     public abstract class Base
-    { }
+    {
+
+    }
 }

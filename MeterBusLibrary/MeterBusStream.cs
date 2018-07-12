@@ -9,28 +9,31 @@ namespace MeterBusLibrary
     public class MeterBusStream : IDisposable
     {
         // Disposable objects
-        private readonly List<IDisposable> objectsToDispose = new List<IDisposable>();
+        private readonly List<IDisposable> _objectsToDispose = new List<IDisposable>();
+        private readonly Stream _stream;
 
-        private readonly Stream stream;
         public MeterBusStream(Stream stream, bool ownStream)
         {
-            this.stream = stream;
+            _stream = stream;
+
             if (ownStream)
-                objectsToDispose.Add(stream);
+                _objectsToDispose.Add(stream);
         }
 
         public MeterBusStream(SettingsSerial settings)
         {
             System.IO.Ports.SerialPort serialPort = new System.IO.Ports.SerialPort(settings.PortName, settings.BaudRate, settings.Parity, settings.DataBits, settings.StopBits);
-            objectsToDispose.Add(serialPort);
+            _objectsToDispose.Add(serialPort);
             serialPort.Open();
-            this.stream = serialPort.BaseStream;
+
+            _stream = serialPort.BaseStream;
         }
 
         public void Write(byte[] buf)
         {
             System.Diagnostics.Debug.Assert(buf.Length > 0);
             System.Diagnostics.Debug.Assert(buf.Length <= 256);
+
             switch (buf.Length)
             {
                 case 1:
@@ -58,7 +61,7 @@ namespace MeterBusLibrary
                 ms.WriteByte((byte)ResponseCodes.FRAME_END);
 
                 ms.Seek(0, SeekOrigin.Begin);
-                ms.CopyTo(stream);
+                ms.CopyTo(_stream);
             }
         }
 
@@ -73,13 +76,13 @@ namespace MeterBusLibrary
                 ms.WriteByte((byte)ResponseCodes.FRAME_END);
 
                 ms.Seek(0, SeekOrigin.Begin);
-                ms.CopyTo(stream);
+                ms.CopyTo(_stream);
             }
         }
 
         private void Write1(byte[] buf)
         {
-            stream.Write(buf, 0, buf.Length);
+            _stream.Write(buf, 0, buf.Length);
         }
 
         private static byte CheckSum(byte[] buf, int offset, int length)
@@ -92,7 +95,7 @@ namespace MeterBusLibrary
             byte[] buf = new byte[256];
             int result_length = 0, result_offset;
             int read_result;
-            read_result = stream.Read(buf, result_length, 1);
+            read_result = _stream.Read(buf, result_length, 1);
             if (read_result != 1)
                 throw new InvalidDataException();
             result_length++;
@@ -108,7 +111,7 @@ namespace MeterBusLibrary
                         int size = 5;
                         do
                         {
-                            read_result = stream.Read(buf, result_length, size - result_length);
+                            read_result = _stream.Read(buf, result_length, size - result_length);
                             result_length += read_result;
                         }
                         while (result_length < size);
@@ -125,7 +128,7 @@ namespace MeterBusLibrary
                         int size = 4;
                         do
                         {
-                            read_result = stream.Read(buf, result_length, size - result_length);
+                            read_result = _stream.Read(buf, result_length, size - result_length);
                             result_length += read_result;
                         }
                         while (result_length < size);
@@ -136,7 +139,7 @@ namespace MeterBusLibrary
                         size += (int)buf[1] + 2;
                         do
                         {
-                            read_result = stream.Read(buf, result_length, size - result_length);
+                            read_result = _stream.Read(buf, result_length, size - result_length);
                             result_length += read_result;
                         }
                         while (result_length < size);
@@ -170,10 +173,10 @@ namespace MeterBusLibrary
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                foreach (IDisposable dispObj in objectsToDispose.Reverse<IDisposable>())
+                foreach (IDisposable dispObj in _objectsToDispose.Reverse<IDisposable>())
                     dispObj.Dispose();
                 // TODO: set large fields to null.
-                objectsToDispose.Clear();
+                _objectsToDispose.Clear();
 
                 disposedValue = true;
             }

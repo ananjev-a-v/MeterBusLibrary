@@ -5,11 +5,14 @@ using System.Text;
 
 namespace MeterBusLibrary.Domain
 {
-    class DIFE
+    internal sealed class DIFE
     {
         public int StorageNumber { get; }
+
         public int Tariff { get; }
+
         public int Device { get; }
+
         public bool Extension { get; }
 
         public DIFE(byte b)

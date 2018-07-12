@@ -17,11 +17,11 @@ namespace MeterBusLibrary.Domain
         Water = 0x07, //Water
         HCA = 0x08, //H.C.A.
         Reserved = 0x09, //Reserved
-        Gas2=0x0A, //Gas Mode 2
-        Hea2=0x0B, //Heat Mode 2
-        HotWater2=0x0C, //Hot Water Mode 2
-        Water2=0x0D, //Water Mode 2
-        HCA2=0x0E, //H.C.A. Mode 2
+        Gas2 = 0x0A, //Gas Mode 2
+        Hea2 = 0x0B, //Heat Mode 2
+        HotWater2 = 0x0C, //Hot Water Mode 2
+        Water2 = 0x0D, //Water Mode 2
+        HCA2 = 0x0E, //H.C.A. Mode 2
         Reserved2 = 0x0F, //Reserved
     }
 }

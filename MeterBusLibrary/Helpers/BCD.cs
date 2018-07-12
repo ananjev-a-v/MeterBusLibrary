@@ -9,7 +9,8 @@ namespace MeterBusLibrary.Helpers
     {
         public static string BCDToString(this IEnumerable<byte> bytes)
         {
-            string result = String.Join(String.Empty, bytes.Reverse().Select(b => b.ToString("X2")));
+            var result = String.Join(String.Empty, bytes.Reverse().Select(b => b.ToString("X2")));
+
             return result;
         }
     }

@@ -11,16 +11,16 @@ namespace MeterBusLibrary.Responses
         public bool DataFlowControl { get; }
         public byte Address { get; }
 
-        internal _UD_Base(bool AccessDemand, bool DataFlowControl, byte Address)
+        internal _UD_Base(bool accessDemand, bool dataFlowControl, byte address)
         {
-            this.AccessDemand = AccessDemand;
-            this.DataFlowControl = DataFlowControl;
-            this.Address = Address;
+            this.AccessDemand = accessDemand;
+            this.DataFlowControl = dataFlowControl;
+            this.Address = address;
         }
 
         public override string ToString()
         {
-            return String.Format("Address={0:x2}, AccessDemand={1}, DataFlowControl={2}", Address, AccessDemand, DataFlowControl);
+            return string.Format("Address={0:x2}, AccessDemand={1}, DataFlowControl={2}", Address, AccessDemand, DataFlowControl);
         }
     }
 }

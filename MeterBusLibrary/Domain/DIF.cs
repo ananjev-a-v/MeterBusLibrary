@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MeterBusLibrary.Domain
 {
-    class DIF
+    internal sealed class DIF
     {
         private Dictionary<DataTypes, int> LenghtsInBits = new Dictionary<DataTypes, int>()
         {
@@ -26,6 +26,7 @@ namespace MeterBusLibrary.Domain
             { DataTypes._12_digit_BCD, 48 },
             { DataTypes._Special_Functions, 64 },
         };
+
         public int Length
         {
             get
@@ -40,8 +41,11 @@ namespace MeterBusLibrary.Domain
             }
         }
         public DataTypes DataType { get; }
+
         public Functions Function { get; }
+
         public bool StorageLSB { get; }
+
         public bool Extension { get; }
 
         public DIF(byte b)
