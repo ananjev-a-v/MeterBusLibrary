@@ -15,14 +15,16 @@ namespace MeterBusLibrary
             {
                 return new Empty();
             }
+
             // RSP_UD
             if ((buf[0] & 0x0f) != 0x08)
                 throw new InvalidDataException();
             _UD_Base UD = new _UD_Base(
-                AccessDemand: (buf[0] & 0x20) != 0,
-                DataFlowControl: (buf[0] & 0x10) != 0,
-                Address: buf[1]
+                accessDemand: (buf[0] & 0x20) != 0,
+                dataFlowControl: (buf[0] & 0x10) != 0,
+                address: buf[1]
                 );
+
             using (MemoryStream stream = new MemoryStream(buf, 2, buf.Length - 2))
             using (BinaryReader source = new BinaryReader(stream))
             {

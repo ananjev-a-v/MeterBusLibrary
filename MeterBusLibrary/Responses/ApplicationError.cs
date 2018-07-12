@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MeterBusLibrary.Responses
 {
-    public class ApplicationError : _UD_Base
+    public sealed class ApplicationError : _UD_Base
     {
         public enum Codes : byte
         {
@@ -23,19 +23,19 @@ namespace MeterBusLibrary.Responses
 
         public Codes Code { get; }
 
-        public ApplicationError(_UD_Base UD, Codes code)
-                :base(UD.AccessDemand, UD.DataFlowControl, UD.Address)
-            {
+        public ApplicationError(_UD_Base ud, Codes code) : base(ud.AccessDemand, ud.DataFlowControl, ud.Address)
+        {
             this.Code = code;
         }
 
-        public ApplicationError(_UD_Base UD, byte code)
-                : this(UD, (Codes)code)
-            { }
+        public ApplicationError(_UD_Base UD, byte code) : this(UD, (Codes)code)
+        {
+
+        }
 
         public override string ToString()
         {
-            return String.Format("{0}({1}):{2}", this.GetType().Name, base.ToString(), Code);
+            return string.Format("{0}({1}):{2}", this.GetType().Name, base.ToString(), Code);
         }
     }
 }

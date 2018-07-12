@@ -6,10 +6,12 @@ using System.Text;
 
 namespace MeterBusLibrary.Domain
 {
-    class VIFE_FD
+    internal sealed class VIFE_FD
     {
         public bool Extension { get; }
+
         public UnitsVariableData Units { get; }
+
         public int Magnitude { get; }
 
         public VIFE_FD(byte b)

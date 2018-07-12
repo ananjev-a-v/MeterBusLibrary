@@ -9,11 +9,14 @@ namespace MeterBusLibrary.Responses
     public abstract class _UD_Data : _UD_Base
     {
         public abstract UInt32 IdentificationNo { get; }
+
         public abstract byte AccessNo { get; }
+
         public abstract MediumFixedData Medium { get; }
 
-        public _UD_Data(_UD_Base UD)
-                : base(UD.AccessDemand, UD.DataFlowControl, UD.Address)
-        { }
+        public _UD_Data(_UD_Base ud) : base(ud.AccessDemand, ud.DataFlowControl, ud.Address)
+        {
+
+        }
     }
 }

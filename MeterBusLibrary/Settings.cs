@@ -6,5 +6,7 @@ using System.Text;
 namespace MeterBusLibrary
 {
     public abstract class Settings
-    { }
+    {
+
+    }
 }

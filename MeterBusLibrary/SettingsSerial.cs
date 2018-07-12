@@ -8,9 +8,13 @@ namespace MeterBusLibrary
     public abstract class SettingsSerial : Settings
     {
         public abstract string PortName { get; }
+
         public virtual int BaudRate { get { return 2400; } }
+
         public virtual int DataBits { get { return 8; } }
+
         public virtual System.IO.Ports.Parity Parity { get { return System.IO.Ports.Parity.Even; } }
+
         public virtual System.IO.Ports.StopBits StopBits { get { return System.IO.Ports.StopBits.One; } }
 
         public override int GetHashCode()

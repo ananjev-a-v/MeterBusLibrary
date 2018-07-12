@@ -5,19 +5,18 @@ using System.Text;
 
 namespace MeterBusLibrary.Responses
 {
-    public class AlarmStatus : _UD_Base
+    public sealed class AlarmStatus : _UD_Base
     {
-        public byte status { get; }
+        public byte Status { get; }
 
-        public AlarmStatus(_UD_Base UD, byte status)
-                : base(UD.AccessDemand, UD.DataFlowControl, UD.Address)
+        public AlarmStatus(_UD_Base ud, byte status) : base(ud.AccessDemand, ud.DataFlowControl, ud.Address)
         {
-            this.status = status;
+            this.Status = status;
         }
 
         public override string ToString()
         {
-            return String.Format("{0}({1}):{2:x2}", this.GetType().Name, base.ToString(), status);
+            return string.Format("{0}({1}):{2:x2}", this.GetType().Name, base.ToString(), Status);
         }
     }
 }

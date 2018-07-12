@@ -8,17 +8,24 @@ using System.Text;
 
 namespace MeterBusLibrary.Responses
 {
-    public class VariableData : _UD_Data
+    public sealed class VariableData : _UD_Data
     {
-        private static bool isVerbose = false;
+        private static bool _isVerbose = false;
+
         private class FixedDataHeader
         {
             public UInt32 IdentificationNo { get; }
+
             public UInt16 Manufr { get; }
+
             public byte Version { get; }
+
             public MediumFixedData Medium { get; }
+
             public byte AccessNo { get; }
+
             public byte Status { get; }
+
             public UInt16 Signature { get; }
 
             public FixedDataHeader(BinaryReader source)
@@ -29,6 +36,7 @@ namespace MeterBusLibrary.Responses
                         throw new InvalidDataException();
                     IdentificationNo = UInt32.Parse(buf.BCDToString());
                 }
+
                 Manufr = source.ReadUInt16();
                 Version = source.ReadByte();
                 Medium = (MediumFixedData)source.ReadByte();
@@ -38,36 +46,41 @@ namespace MeterBusLibrary.Responses
             }
         }
 
-        public class Item
+        public sealed class Item
         {
             public DataTypes DataType { get; }
+
             public Functions Function { get; }
 
             public UInt64 StorageNumber { get; }
+
             public UInt32 Tariff { get; }
+
             public UInt16 SubUnit { get; }
 
             public object Value { get; }
 
-            public class UnitData
+            public sealed class UnitData
             {
                 public UnitsVariableData Unit { get; }
+
                 public int Magnitude { get; }
+
                 public string VIF_string { get; }
 
-                public UnitData(UnitsVariableData Unit, int Magnitude, string VIF_string = null)
+                public UnitData(UnitsVariableData unit, int magnitude, string vif = null)
                 {
-                    this.Unit = Unit;
-                    this.Magnitude = Magnitude;
-                    this.VIF_string = VIF_string;
+                    this.Unit = unit;
+                    this.Magnitude = magnitude;
+                    this.VIF_string = vif;
                 }
 
                 public override string ToString()
                 {
                     if (VIF_string == null)
-                        return String.Format("Unit: {0}, Magnitude: {1}", Unit, Magnitude);
+                        return string.Format("Unit: {0}, Magnitude: {1}", Unit, Magnitude);
                     else
-                        return String.Format("Unit: {0} ({2}), Magnitude: {1}", Unit, Magnitude, VIF_string);
+                        return string.Format("Unit: {0} ({2}), Magnitude: {1}", Unit, Magnitude, VIF_string);
                 }
             }
 
@@ -344,7 +357,7 @@ namespace MeterBusLibrary.Responses
 
             public override string ToString()
             {
-                if (isVerbose)
+                if (_isVerbose)
                     return String.Format(
                         "NormalizedValue: {7} (" +
                         "DataType: {0}, Function: {1}, StorageNumber: {2}, Tariff: {3}, SubUnit: {4}, " +
@@ -361,7 +374,9 @@ namespace MeterBusLibrary.Responses
         public List<Item> Items { get; }
 
         public override UInt32 IdentificationNo { get { return header.IdentificationNo; } }
+
         public override byte AccessNo { get { return header.AccessNo; } }
+
         public override MediumFixedData Medium { get { return header.Medium; } }
 
         private readonly FixedDataHeader header;
@@ -375,22 +390,24 @@ namespace MeterBusLibrary.Responses
 
         private List<Item> GetItems(BinaryReader source)
         {
-            List<Item> result = new List<Item>();
-            while (source.BaseStream.Position< source.BaseStream.Length)
+            var result = new List<Item>();
+
+            while (source.BaseStream.Position < source.BaseStream.Length)
             {
                 Item item = new Item(source);
                 result.Add(item);
             }
+
             return result;
         }
 
         public override string ToString()
         {
-            return String.Format(
+            return string.Format(
                 "IdentificationNo: {0}, AccessNo: {1}, Medium: {2}, " +
                 "Items: {3}",
                 IdentificationNo, AccessNo, Medium,
-                String.Join("\n", Items.Select(i=>i.ToString()))
+                String.Join("\n", Items.Select(i => i.ToString()))
                 );
         }
     }

@@ -8,15 +8,22 @@ using System.Text;
 
 namespace MeterBusLibrary.Responses
 {
-    public class FixedData : _UD_Data
+    public sealed class FixedData : _UD_Data
     {
         public override UInt32 IdentificationNo { get; }
+
         public override byte AccessNo { get; }
+
         public override MediumFixedData Medium { get; }
+
         public bool CountersFixed { get; }
+
         public UnitsFixedData Units1 { get; }
+
         public UnitsFixedData Units2 { get; }
+
         public UInt32 Counter1 { get; }
+
         public UInt32 Counter2 { get; }
 
         public FixedData(_UD_Base UD, BinaryReader source)
@@ -28,6 +35,7 @@ namespace MeterBusLibrary.Responses
                     throw new InvalidDataException();
                 IdentificationNo = UInt32.Parse(buf.BCDToString());
             }
+
             AccessNo = source.ReadByte();
             byte Status = source.ReadByte();
             bool CountersBCD = (Status & 0x01) == 0;
@@ -37,6 +45,7 @@ namespace MeterBusLibrary.Responses
             Units1 = (UnitsFixedData)(buf6 & 0x3F);
             Units2 = (UnitsFixedData)(buf7 & 0x3F);
             Medium = (MediumFixedData)(((buf6 & 0xc0) >> 6) | ((buf7 & 0xc0) >> 4));
+
             if (CountersBCD)
             {
                 byte[] buf8 = new byte[4];
