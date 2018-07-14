@@ -25,10 +25,10 @@ namespace System.Net.Protocols.MeterBus
 
         internal void Write(Stream stream)
         {
-            stream.WriteByte((byte)ResponseCodes.LONG_FRAME);
+            stream.WriteByte((byte)ResponseCodes.LONG_FRAME_START);
             stream.WriteByte((byte)(_payload.Length + 3));
             stream.WriteByte((byte)(_payload.Length + 3));
-            stream.WriteByte((byte)ResponseCodes.LONG_FRAME);
+            stream.WriteByte((byte)ResponseCodes.LONG_FRAME_START);
             stream.WriteByte((byte)_control);
             stream.WriteByte(_address);
             stream.WriteByte((byte)_controlInformation);

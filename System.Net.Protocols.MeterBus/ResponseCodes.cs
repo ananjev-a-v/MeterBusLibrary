@@ -8,8 +8,9 @@ namespace System.Net.Protocols.MeterBus
     internal enum ResponseCodes : byte
     {
         ACK = 0xE5,
-        LONG_FRAME = 0x68,
         SHORT_FRAME_START = 0x10,
+        LONG_FRAME_START = 0x68,
+        CONTROL_FRAME_START = 0x68,
         FRAME_END = 0x16,
     }
 }

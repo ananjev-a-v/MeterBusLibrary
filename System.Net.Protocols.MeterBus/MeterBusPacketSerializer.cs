@@ -30,9 +30,9 @@ namespace System.Net.Protocols.MeterBus
 
                     }
                     break;
-                case ResponseCodes.LONG_FRAME:
+                case ResponseCodes.LONG_FRAME_START:
                     {
-                        if ((ResponseCodes)buffer[result_length - 1] != ResponseCodes.LONG_FRAME)
+                        if ((ResponseCodes)buffer[result_length - 1] != ResponseCodes.LONG_FRAME_START)
                             throw new InvalidDataException();
 
                         if (buffer[1] != buffer[2])
@@ -57,7 +57,7 @@ namespace System.Net.Protocols.MeterBus
                     case AckMeterBusPackage ackPackage: break;
                     case ShortMeterBusPackage shortPackage: shortPackage.Write(stream); break;
                     case LongMeterBusPackage longPackage: longPackage.Write(stream); break;
-                    case ControlMeterBusPackage longPackage: break;
+                    case ControlMeterBusPackage controlPackage: controlPackage.Write(stream); break;
                     default: throw new NotImplementedException();
                 }
 
