@@ -1,4 +1,4 @@
-﻿using MeterBusLibrary;
+﻿using System.Net.Protocols.MeterBus;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +28,6 @@ namespace System.Net.Protocols.MeterBus
                         if (buffer[result_length - 1] != CheckSum(buffer, 1, 2))
                             throw new InvalidDataException();
 
-
                     }
                     break;
                 case ResponseCodes.LONG_FRAME_START:
@@ -51,8 +50,9 @@ namespace System.Net.Protocols.MeterBus
                         Array.Resize(ref buffer, length);
 
                         var asd = ResponseMessage.Parse(buffer);
+
+                        return new LongMeterBusPackage((ControlCommand)buffer[0], (ControlCommandInformation)buffer[2], buffer[1], buffer.Skip(3).Take(buffer.Length - 3).ToArray());
                     }
-                    break;
                 default:
                     throw new InvalidDataException();
             }

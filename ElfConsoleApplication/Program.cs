@@ -23,9 +23,15 @@ namespace ElfConsoleApplication
                 .Stream
                 .Subscribe(subscriber);
 
-            endpoint.Send(new ShortMeterBusPackage(ControlCommand.SND_NKE, 0x0a));
+            //endpoint.Send(new ShortMeterBusPackage(ControlCommand.SND_NKE, 0x0a));
+
+            //endpoint.Send(new ShortMeterBusPackage(ControlCommand.SND_UD, 0x0a)); // set address
 
             endpoint.Send(new ShortMeterBusPackage(ControlCommand.REQ_UD2, 0x0a));
+
+            endpoint.Send(new ShortMeterBusPackage(ControlCommand.REQ_UD2, 0x0a));
+
+            //endpoint.Send(new ShortMeterBusPackage(ControlCommand.REQ_UD2, 0x0a));
 
             //endpoint.Send(new LongMeterBusPackage(ControlMask.SND_NKE, ControlInformationMask.MBUS_CONTROL_INFO_APPLICATION_RESET, 0x0a, new byte[] { }));
 
@@ -35,7 +41,7 @@ namespace ElfConsoleApplication
 
             var settings = new Settings();
             var addresses = new byte[] { 0x0a, 0x0b };
-            var parsed = new List<MeterBusLibrary.Responses.Base>();
+            var parsed = new List<System.Net.Protocols.MeterBus.Responses.Base>();
 
             using (var stream = new MeterBusStream(settings))
             {

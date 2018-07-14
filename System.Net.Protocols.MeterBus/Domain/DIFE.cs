@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MeterBusLibrary.Domain
+namespace System.Net.Protocols.MeterBus.Domain
 {
     internal sealed class DIFE
     {

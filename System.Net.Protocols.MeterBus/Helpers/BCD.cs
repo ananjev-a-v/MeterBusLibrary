@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MeterBusLibrary.Helpers
+namespace System.Net.Protocols.MeterBus.Helpers
 {
     public static class BCD
     {
