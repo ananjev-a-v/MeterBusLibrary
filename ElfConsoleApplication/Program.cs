@@ -23,27 +23,29 @@ namespace ElfConsoleApplication
                 .Stream
                 .Subscribe(subscriber);
 
-            endpoint.Send(new ShortMeterBusPackage(ControlMask.SND_NKE, 0x0a));
+            endpoint.Send(new ShortMeterBusPackage(ControlCommand.SND_NKE, 0x0a));
 
-            endpoint.Send(new LongMeterBusPackage(ControlMask.SND_NKE, ControlInformationMask.MBUS_CONTROL_INFO_APPLICATION_RESET, 0x0a, new byte[] { }));
+            endpoint.Send(new ShortMeterBusPackage(ControlCommand.REQ_UD2, 0x0a));
+
+            //endpoint.Send(new LongMeterBusPackage(ControlMask.SND_NKE, ControlInformationMask.MBUS_CONTROL_INFO_APPLICATION_RESET, 0x0a, new byte[] { }));
 
             Console.WriteLine("Data sent");
 
             Console.ReadKey();
 
             var settings = new Settings();
-            var numbers = new byte[] { 56, 57 };
+            var addresses = new byte[] { 0x0a, 0x0b };
             var parsed = new List<MeterBusLibrary.Responses.Base>();
 
             using (var stream = new MeterBusStream(settings))
             {
-                foreach (byte nr in numbers)
+                foreach (byte address in addresses)
                 {
-                    stream.Write(new byte[] { 0x7B, nr });
+                    stream.Write(new byte[] { 0x7b, address });
 
-                    var buf = stream.Read();
+                    var buffer = stream.Read();
 
-                    parsed.Add(ResponseMessage.Parse(buf));
+                    parsed.Add(ResponseMessage.Parse(buffer));
                 }
             }
 

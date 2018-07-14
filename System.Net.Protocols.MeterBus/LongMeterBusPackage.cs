@@ -7,13 +7,13 @@ namespace System.Net.Protocols.MeterBus
 {
     public sealed class LongMeterBusPackage : MeterBusPackage
     {
-        private readonly ControlMask _control;
-        private readonly ControlInformationMask _controlInformation;
+        private readonly ControlCommand _control;
+        private readonly ControlCommandInformation _controlInformation;
         private readonly byte _address;
         private readonly byte[] _payload;
         private readonly byte _crc;
 
-        public LongMeterBusPackage(ControlMask control, ControlInformationMask controlInformation, byte address, byte[] payload)
+        public LongMeterBusPackage(ControlCommand control, ControlCommandInformation controlInformation, byte address, byte[] payload)
         {
             _control = control;
             _controlInformation = controlInformation;
@@ -23,7 +23,7 @@ namespace System.Net.Protocols.MeterBus
             _crc = CheckSum(data, 0, data.Length);
         }
 
-        internal void Write(Stream stream)
+        internal override void Write(Stream stream)
         {
             stream.WriteByte((byte)ResponseCodes.LONG_FRAME_START);
             stream.WriteByte((byte)(_payload.Length + 3));

@@ -54,7 +54,7 @@ namespace System.Net.Protocols.MeterBus
             {
                 switch (package)
                 {
-                    case AckMeterBusPackage ackPackage: break;
+                    case AckMeterBusPackage ackPackage: ackPackage.Write(stream); break;
                     case ShortMeterBusPackage shortPackage: shortPackage.Write(stream); break;
                     case LongMeterBusPackage longPackage: longPackage.Write(stream); break;
                     case ControlMeterBusPackage controlPackage: controlPackage.Write(stream); break;
