@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MeterBusLibrary;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace System.Net.Protocols.MeterBus
     {
         public INetworkPacket Deserialize(byte[] buffer)
         {
-            var result_length = 1;
+            var result_length = 0;
 
-            switch ((ResponseCodes)buffer[result_length - 1])
+            switch ((ResponseCodes)buffer[result_length])
             {
                 case ResponseCodes.ACK: return new AckMeterBusPackage();
                 case ResponseCodes.SHORT_FRAME_START:
@@ -21,10 +22,10 @@ namespace System.Net.Protocols.MeterBus
                         if (buffer.Length != 5)
                             throw new InvalidDataException();
 
-                        if ((ResponseCodes)buffer[result_length - 1] != ResponseCodes.FRAME_END)
+                        if ((ResponseCodes)buffer[result_length] != ResponseCodes.FRAME_END)
                             throw new InvalidDataException();
 
-                        if (buffer[result_length - 2] != CheckSum(buffer, 1, 2))
+                        if (buffer[result_length - 1] != CheckSum(buffer, 1, 2))
                             throw new InvalidDataException();
 
 
@@ -32,13 +33,24 @@ namespace System.Net.Protocols.MeterBus
                     break;
                 case ResponseCodes.LONG_FRAME_START:
                     {
-                        if ((ResponseCodes)buffer[result_length - 1] != ResponseCodes.LONG_FRAME_START)
+                        if ((ResponseCodes)buffer[result_length] != ResponseCodes.LONG_FRAME_START)
                             throw new InvalidDataException();
 
                         if (buffer[1] != buffer[2])
                             throw new InvalidDataException();
 
+                        var length = (int)buffer[1];
 
+                        if ((ResponseCodes)buffer[length + 5] != ResponseCodes.FRAME_END)
+                            throw new InvalidDataException();
+
+                        if (buffer[length + 4] != CheckSum(buffer, 4, length))
+                            throw new InvalidDataException();
+
+                        Array.Copy(buffer, 4, buffer, 0, length);
+                        Array.Resize(ref buffer, length);
+
+                        var asd = ResponseMessage.Parse(buffer);
                     }
                     break;
                 default:

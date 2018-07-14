@@ -9,22 +9,21 @@ namespace MeterBusLibrary
 {
     public static class ResponseMessage
     {
-        public static Base Parse(byte[] buf)
+        public static Base Parse(byte[] buffer)
         {
-            if (buf.Length == 0)
+            if (buffer.Length == 0)
                 return new Empty();
 
             // RSP_UD
-            if ((buf[0] & 0x0f) != 0x08)
+            if ((buffer[0] & 0x0f) != 0x08)
                 throw new InvalidDataException();
 
             var ud = new _UD_Base(
-                accessDemand: (buf[0] & 0x20) != 0,
-                dataFlowControl: (buf[0] & 0x10) != 0,
-                address: buf[1]
-                );
+                accessDemand: (buffer[0] & 0x20) != 0,
+                dataFlowControl: (buffer[0] & 0x10) != 0,
+                address: buffer[1]);
 
-            using (var stream = new MemoryStream(buf, 2, buf.Length - 2))
+            using (var stream = new MemoryStream(buffer, 2, buffer.Length - 2))
             using (var source = new BinaryReader(stream))
             {
                 // Response type
