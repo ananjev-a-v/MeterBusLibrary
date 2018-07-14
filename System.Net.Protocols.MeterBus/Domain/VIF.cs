@@ -1,11 +1,11 @@
-﻿using MeterBusLibrary.Helpers;
+﻿using System.Net.Protocols.MeterBus.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace MeterBusLibrary.Domain
+namespace System.Net.Protocols.MeterBus.Domain
 {
     class VIF
     {

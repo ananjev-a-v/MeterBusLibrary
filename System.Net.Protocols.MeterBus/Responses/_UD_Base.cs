@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MeterBusLibrary.Responses
+namespace System.Net.Protocols.MeterBus.Responses
 {
     public class _UD_Base : Base
     {

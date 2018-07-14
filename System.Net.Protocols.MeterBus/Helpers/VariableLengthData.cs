@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace MeterBusLibrary.Helpers
+namespace System.Net.Protocols.MeterBus.Helpers
 {
     internal static class VariableLengthData
     {

@@ -1,12 +1,12 @@
-﻿using MeterBusLibrary.Domain;
-using MeterBusLibrary.Helpers;
+﻿using System.Net.Protocols.MeterBus.Domain;
+using System.Net.Protocols.MeterBus.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace MeterBusLibrary.Responses
+namespace System.Net.Protocols.MeterBus.Responses
 {
     public sealed class FixedData : _UD_Data
     {

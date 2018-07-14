@@ -1,11 +1,11 @@
-﻿using MeterBusLibrary.Responses;
+﻿using System.Net.Protocols.MeterBus.Responses;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace MeterBusLibrary
+namespace System.Net.Protocols.MeterBus
 {
     public static class ResponseMessage
     {
@@ -27,17 +27,17 @@ namespace MeterBusLibrary
             using (var source = new BinaryReader(stream))
             {
                 // Response type
-                switch (source.ReadByte())
+                switch ((ControlCommandInformation)source.ReadByte())
                 {
-                    case 0x70: //report of general application errors
+                    case ControlCommandInformation.ERROR_GENERAL: //report of general application errors
                         return new ApplicationError(ud, source.ReadByte());
-                    case 0x71: //report of alarm status
+                    case ControlCommandInformation.STATUS_ALARM: //report of alarm status
                         return new AlarmStatus(ud, source.ReadByte());
-                    case 0x72: //
-                    case 0x76: //variable data respond
+                    case ControlCommandInformation.RESP_VARIABLE: //
+                    case ControlCommandInformation.RESP_VARIABLE_MSB: //variable data respond
                         return new VariableData(ud, source);
-                    case 0x73: //
-                    case 0x77: //fixed data respond
+                    case ControlCommandInformation.RESP_FIXED: //
+                    case ControlCommandInformation.RESP_FIXED_MSB: //fixed data respond
                         return new FixedData(ud, source);
                     default:
                         throw new InvalidDataException();

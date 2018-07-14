@@ -1,12 +1,12 @@
-﻿using MeterBusLibrary.Domain;
-using MeterBusLibrary.Helpers;
+﻿using System.Net.Protocols.MeterBus.Domain;
+using System.Net.Protocols.MeterBus.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace MeterBusLibrary.Responses
+namespace System.Net.Protocols.MeterBus.Responses
 {
     public sealed class VariableData : _UD_Data
     {
@@ -231,7 +231,7 @@ namespace MeterBusLibrary.Responses
                             Value = Int64.Parse(buf.BCDToString());
                             break;
                         case DataTypes._Special_Functions:
-                            throw new NotImplementedException(); /// !!!
+                            //throw new NotImplementedException(); /// !!!
                             break;
                     }
                 }
