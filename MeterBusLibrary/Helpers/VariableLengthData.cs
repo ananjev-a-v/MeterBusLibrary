@@ -6,19 +6,21 @@ using System.Text;
 
 namespace MeterBusLibrary.Helpers
 {
-    static class VariableLengthData
+    internal static class VariableLengthData
     {
         public static string ReadString(BinaryReader source)
         {
             int Length = source.ReadByte();
             byte[] buf = source.ReadBytes(Length);
             Array.Reverse(buf);
+
             return ASCIIEncoding.ASCII.GetString(buf);
         }
 
         public static object ReadValue(BinaryReader source)
         {
-            int Length = source.ReadByte();
+            var Length = source.ReadByte();
+
             if ((Length >= 0x00) && (Length <= 0xbf))
             { // ASCII string with LVAR characters
                 byte[] buf = source.ReadBytes(Length);

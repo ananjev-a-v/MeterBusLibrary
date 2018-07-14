@@ -18,6 +18,7 @@ namespace MeterBusLibrary.Domain
         {
             Extension = (b & 0x80) != 0;
             b &= 0x7f; // clear Extension bit
+
             if ((b >= 0) && (b <= 0x1f))
             {
                 Units = UnitsVariableData.ErrorCodesVIFE;
