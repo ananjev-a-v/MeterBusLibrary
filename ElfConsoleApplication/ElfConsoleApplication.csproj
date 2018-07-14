@@ -58,6 +58,10 @@
       <Project>{E58986B5-7F00-4EDF-A771-29D568137E95}</Project>
       <Name>System.Net.Bindings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\System.Net.Protocols.MeterBus\System.Net.Protocols.MeterBus.csproj">
+      <Project>{2aeef95c-5337-4eae-a636-0cf640855cf6}</Project>
+      <Name>System.Net.Protocols.MeterBus</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

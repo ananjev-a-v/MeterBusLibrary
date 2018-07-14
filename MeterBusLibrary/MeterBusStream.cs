@@ -22,7 +22,7 @@ namespace MeterBusLibrary
 
         public MeterBusStream(SettingsSerial settings)
         {
-            System.IO.Ports.SerialPort serialPort = new System.IO.Ports.SerialPort(settings.PortName, settings.BaudRate, settings.Parity, settings.DataBits, settings.StopBits);
+            var serialPort = new System.IO.Ports.SerialPort(settings.PortName, settings.BaudRate, settings.Parity, settings.DataBits, settings.StopBits);
 
             _objectsToDispose.Add(serialPort);
 
@@ -35,7 +35,7 @@ namespace MeterBusLibrary
         {
             System.Diagnostics.Debug.Assert(buffer.Length > 0);
             System.Diagnostics.Debug.Assert(buffer.Length <= 256);
-
+            
             switch (buffer.Length)
             {
                 case 1:
@@ -73,7 +73,7 @@ namespace MeterBusLibrary
             {
                 stream.WriteByte((byte)ResponseCodes.SHORT_FRAME_START);
                 stream.Write(buffer, 0, buffer.Length);
-                byte checkSum = CheckSum(buffer, 0, buffer.Length);
+                var checkSum = CheckSum(buffer, 0, buffer.Length);
                 stream.WriteByte(checkSum);
                 stream.WriteByte((byte)ResponseCodes.FRAME_END);
 

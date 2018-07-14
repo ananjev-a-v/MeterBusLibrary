@@ -5,11 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Reactive" Version="4.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Tcp\" />
+    <ProjectReference Include="..\System.Net.Bindings\System.Net.Bindings.csproj" />
   </ItemGroup>
 
 </Project>
