@@ -1,6 +1,7 @@
 ﻿using MeterBusLibrary;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Bindings;
 using System.Text;
@@ -22,7 +23,7 @@ namespace ElfConsoleApplication
 
         public void OnNext(PacketStreamEvent value)
         {
-           
+            Debug.WriteLine($"{value.Package.GetType().Name} received from {value.Binding.ToString()}");
         }
     }
 }
