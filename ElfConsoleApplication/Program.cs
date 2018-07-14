@@ -6,6 +6,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Net;
 using System.Net.Bindings.Udp;
+using System.Net.Protocols.MeterBus;
 using System.Text;
 
 namespace ElfConsoleApplication
@@ -16,13 +17,13 @@ namespace ElfConsoleApplication
         {
             var subscriber = new MBusEventSubscriber();
 
-            var endpoint = new UdpEndpointBinding(new IPEndPoint(IPAddress.Parse("192.168.1.135"), 502), new MBusPacketSerializer(), new Logger());
+            var endpoint = new UdpEndpointBinding(new IPEndPoint(IPAddress.Parse("192.168.1.135"), 502), new MeterBusPacketSerializer(), new Logger());
 
             endpoint
                 .Stream
                 .Subscribe(subscriber);
 
-            endpoint.Send(new MBusPackage());
+            endpoint.Send(new ShortMeterBusPackage(new byte[] { 0x40, 0x0a }));
 
             Console.WriteLine("Data sent");
 

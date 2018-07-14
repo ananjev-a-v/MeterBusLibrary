@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{0590D187-9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Net.Bindings", "System.Net.Bindings\System.Net.Bindings.csproj", "{E58986B5-7F00-4EDF-A771-29D568137E95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Net.Protocols.MeterBus", "System.Net.Protocols.MeterBus\System.Net.Protocols.MeterBus.csproj", "{2AEEF95C-5337-4EAE-A636-0CF640855CF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{E58986B5-7F00-4EDF-A771-29D568137E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E58986B5-7F00-4EDF-A771-29D568137E95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E58986B5-7F00-4EDF-A771-29D568137E95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AEEF95C-5337-4EAE-A636-0CF640855CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AEEF95C-5337-4EAE-A636-0CF640855CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AEEF95C-5337-4EAE-A636-0CF640855CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AEEF95C-5337-4EAE-A636-0CF640855CF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
