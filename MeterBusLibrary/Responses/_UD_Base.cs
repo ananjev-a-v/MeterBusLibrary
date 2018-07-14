@@ -8,7 +8,9 @@ namespace MeterBusLibrary.Responses
     public class _UD_Base : Base
     {
         public bool AccessDemand { get; }
+
         public bool DataFlowControl { get; }
+
         public byte Address { get; }
 
         internal _UD_Base(bool accessDemand, bool dataFlowControl, byte address)

@@ -31,9 +31,11 @@ namespace MeterBusLibrary.Responses
             public FixedDataHeader(BinaryReader source)
             {
                 {
-                    byte[] buf = new byte[4];
+                    var buf = new byte[4];
+
                     if (source.Read(buf, 0, buf.Length) != buf.Length)
                         throw new InvalidDataException();
+
                     IdentificationNo = UInt32.Parse(buf.BCDToString());
                 }
 

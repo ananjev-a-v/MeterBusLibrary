@@ -26,8 +26,7 @@ namespace MeterBusLibrary.Responses
 
         public UInt32 Counter2 { get; }
 
-        public FixedData(_UD_Base UD, BinaryReader source)
-                : base(UD)
+        public FixedData(_UD_Base UD, BinaryReader source) : base(UD)
         {
             {
                 byte[] buf = new byte[4];

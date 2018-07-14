@@ -23,66 +23,68 @@ namespace MeterBusLibrary
         public MeterBusStream(SettingsSerial settings)
         {
             System.IO.Ports.SerialPort serialPort = new System.IO.Ports.SerialPort(settings.PortName, settings.BaudRate, settings.Parity, settings.DataBits, settings.StopBits);
+
             _objectsToDispose.Add(serialPort);
+
             serialPort.Open();
 
             _stream = serialPort.BaseStream;
         }
 
-        public void Write(byte[] buf)
+        public void Write(byte[] buffer)
         {
-            System.Diagnostics.Debug.Assert(buf.Length > 0);
-            System.Diagnostics.Debug.Assert(buf.Length <= 256);
+            System.Diagnostics.Debug.Assert(buffer.Length > 0);
+            System.Diagnostics.Debug.Assert(buffer.Length <= 256);
 
-            switch (buf.Length)
+            switch (buffer.Length)
             {
                 case 1:
-                    Write1(buf);
+                    WriteByte(buffer);
                     break;
                 case 2:
-                    WriteShort(buf);
+                    WriteShort(buffer);
                     break;
                 default:
-                    WriteLong(buf);
+                    WriteLong(buffer);
                     break;
             }
         }
 
-        private void WriteLong(byte[] buf)
+        private void WriteLong(byte[] buffer)
         {
-            using (MemoryStream ms = new MemoryStream())
+            using (var stream = new MemoryStream())
             {
-                ms.WriteByte((byte)ResponseCodes.LONG_FRAME);
-                ms.WriteByte((byte)buf.Length);
-                ms.WriteByte((byte)buf.Length);
-                ms.WriteByte((byte)ResponseCodes.LONG_FRAME);
-                ms.Write(buf, 0, buf.Length);
-                ms.WriteByte(CheckSum(buf, 0, buf.Length));
-                ms.WriteByte((byte)ResponseCodes.FRAME_END);
+                stream.WriteByte((byte)ResponseCodes.LONG_FRAME);
+                stream.WriteByte((byte)buffer.Length);
+                stream.WriteByte((byte)buffer.Length);
+                stream.WriteByte((byte)ResponseCodes.LONG_FRAME);
+                stream.Write(buffer, 0, buffer.Length);
+                stream.WriteByte(CheckSum(buffer, 0, buffer.Length));
+                stream.WriteByte((byte)ResponseCodes.FRAME_END);
 
-                ms.Seek(0, SeekOrigin.Begin);
-                ms.CopyTo(_stream);
+                stream.Seek(0, SeekOrigin.Begin);
+                stream.CopyTo(_stream);
             }
         }
 
-        private void WriteShort(byte[] buf)
+        private void WriteShort(byte[] buffer)
         {
-            using (MemoryStream ms = new MemoryStream())
+            using (var stream = new MemoryStream())
             {
-                ms.WriteByte((byte)ResponseCodes.SHORT_FRAME_START);
-                ms.Write(buf, 0, buf.Length);
-                byte checkSum = CheckSum(buf, 0, buf.Length);
-                ms.WriteByte(checkSum);
-                ms.WriteByte((byte)ResponseCodes.FRAME_END);
+                stream.WriteByte((byte)ResponseCodes.SHORT_FRAME_START);
+                stream.Write(buffer, 0, buffer.Length);
+                byte checkSum = CheckSum(buffer, 0, buffer.Length);
+                stream.WriteByte(checkSum);
+                stream.WriteByte((byte)ResponseCodes.FRAME_END);
 
-                ms.Seek(0, SeekOrigin.Begin);
-                ms.CopyTo(_stream);
+                stream.Seek(0, SeekOrigin.Begin);
+                stream.CopyTo(_stream);
             }
         }
 
-        private void Write1(byte[] buf)
+        private void WriteByte(byte[] buffer)
         {
-            _stream.Write(buf, 0, buf.Length);
+            _stream.Write(buffer, 0, buffer.Length);
         }
 
         private static byte CheckSum(byte[] buf, int offset, int length)
@@ -92,14 +94,16 @@ namespace MeterBusLibrary
 
         public byte[] Read()
         {
-            byte[] buf = new byte[256];
+            var buffer = new byte[256];
             int result_length = 0, result_offset;
-            int read_result;
-            read_result = _stream.Read(buf, result_length, 1);
+            var read_result = _stream.Read(buffer, result_length, 1);
+
             if (read_result != 1)
                 throw new InvalidDataException();
+
             result_length++;
-            switch ((ResponseCodes)buf[result_length - 1])
+
+            switch ((ResponseCodes)buffer[result_length - 1])
             {
                 case ResponseCodes.ACK:
                     {
@@ -108,45 +112,57 @@ namespace MeterBusLibrary
                     break;
                 case ResponseCodes.SHORT_FRAME_START:
                     {
-                        int size = 5;
+                        var size = 5;
+
                         do
                         {
-                            read_result = _stream.Read(buf, result_length, size - result_length);
+                            read_result = _stream.Read(buffer, result_length, size - result_length);
                             result_length += read_result;
                         }
                         while (result_length < size);
-                        if ((ResponseCodes)buf[result_length - 1] != ResponseCodes.FRAME_END)
+
+                        if ((ResponseCodes)buffer[result_length - 1] != ResponseCodes.FRAME_END)
                             throw new InvalidDataException();
-                        if (buf[result_length - 2] != CheckSum(buf, 1, 2))
+
+                        if (buffer[result_length - 2] != CheckSum(buffer, 1, 2))
                             throw new InvalidDataException();
+
                         result_offset = 1;
                         result_length -= result_offset + 2;
                     }
                     break;
                 case ResponseCodes.LONG_FRAME:
                     {
-                        int size = 4;
+                        var size = 4;
+
                         do
                         {
-                            read_result = _stream.Read(buf, result_length, size - result_length);
+                            read_result = _stream.Read(buffer, result_length, size - result_length);
                             result_length += read_result;
                         }
                         while (result_length < size);
-                        if ((ResponseCodes)buf[result_length - 1] != ResponseCodes.LONG_FRAME)
+
+                        if ((ResponseCodes)buffer[result_length - 1] != ResponseCodes.LONG_FRAME)
                             throw new InvalidDataException();
-                        if (buf[1] != buf[2])
+
+                        if (buffer[1] != buffer[2])
                             throw new InvalidDataException();
-                        size += (int)buf[1] + 2;
+
+                        size += (int)buffer[1] + 2;
+
                         do
                         {
-                            read_result = _stream.Read(buf, result_length, size - result_length);
+                            read_result = _stream.Read(buffer, result_length, size - result_length);
                             result_length += read_result;
                         }
                         while (result_length < size);
-                        if ((ResponseCodes)buf[result_length - 1] != ResponseCodes.FRAME_END)
+
+                        if ((ResponseCodes)buffer[result_length - 1] != ResponseCodes.FRAME_END)
                             throw new InvalidDataException();
-                        if (buf[result_length - 2] != CheckSum(buf, 4, result_length - 4 - 2))
+
+                        if (buffer[result_length - 2] != CheckSum(buffer, 4, result_length - 4 - 2))
                             throw new InvalidDataException();
+
                         result_offset = 4;
                         result_length -= result_offset + 2;
                     }
@@ -154,13 +170,16 @@ namespace MeterBusLibrary
                 default:
                     throw new InvalidDataException();
             }
+
             //return buf.Skip(result_offset).Take(result_length).ToArray();
-            Array.Copy(buf, result_offset, buf, 0, result_length);
-            Array.Resize(ref buf, result_length);
-            return buf;
+            Array.Copy(buffer, result_offset, buffer, 0, result_length);
+            Array.Resize(ref buffer, result_length);
+
+            return buffer;
         }
 
         #region IDisposable Support
+
         private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
@@ -196,6 +215,7 @@ namespace MeterBusLibrary
             // TODO: uncomment the following line if the finalizer is overridden above.
             // GC.SuppressFinalize(this);
         }
+
         #endregion
     }
 }
