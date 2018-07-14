@@ -9,18 +9,9 @@ namespace System.Net.Protocols.MeterBus
 {
     public abstract class MeterBusPackage : INetworkPacket
     {
-        private readonly byte[] _payload;
-
-        public byte[] Payload => _payload;
-
-        public MeterBusPackage()
+        protected static byte CheckSum(byte[] buffer, int offset, int length)
         {
-      
-        }      
-
-        public MeterBusPackage(byte[] data)
-        {
-            _payload = data;
+            return (byte)buffer.Skip(offset).Take(length).Sum(b => b);
         }
     }
 }

@@ -23,7 +23,9 @@ namespace ElfConsoleApplication
                 .Stream
                 .Subscribe(subscriber);
 
-            endpoint.Send(new ShortMeterBusPackage(new byte[] { 0x40, 0x0a }));
+            endpoint.Send(new ShortMeterBusPackage(ControlMask.SND_NKE, 0x0a));
+
+            endpoint.Send(new LongMeterBusPackage(ControlMask.SND_NKE, ControlInformationMask.MBUS_CONTROL_INFO_APPLICATION_RESET, 0x0a, new byte[] { }));
 
             Console.WriteLine("Data sent");
 
