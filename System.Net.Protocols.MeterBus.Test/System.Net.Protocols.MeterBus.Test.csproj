@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Logger.cs" />
     <Compile Include="MBusEventSubscriber.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -63,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\System.IO.Bindings\System.IO.Bindings.csproj">
+      <Project>{3ED7DAD2-A960-4043-BCBB-477E2B86DEA6}</Project>
+      <Name>System.IO.Bindings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\System.Net.Bindings\System.Net.Bindings.csproj">
       <Project>{E58986B5-7F00-4EDF-A771-29D568137E95}</Project>
       <Name>System.Net.Bindings</Name>

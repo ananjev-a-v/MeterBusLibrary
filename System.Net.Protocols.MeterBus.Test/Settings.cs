@@ -4,7 +4,7 @@ using System.IO.Bindings.Serial;
 using System.Linq;
 using System.Text;
 
-namespace ElfConsoleApplication
+namespace System.Net.Protocols.MeterBus.Test
 {
     public sealed class Settings : SettingsSerial
     {
