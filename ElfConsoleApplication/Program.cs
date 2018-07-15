@@ -5,9 +5,11 @@ using System.IO.Bindings.Serial;
 using System.IO.Ports;
 using System.Linq;
 using System.Net;
+using System.Net.Bindings.Tcp;
 using System.Net.Bindings.Udp;
 using System.Net.Protocols.MeterBus;
 using System.Text;
+using System.Threading;
 
 namespace ElfConsoleApplication
 {
@@ -17,19 +19,23 @@ namespace ElfConsoleApplication
         {
             var subscriber = new MBusEventSubscriber();
 
-            var endpoint = new UdpEndpointBinding(new IPEndPoint(IPAddress.Parse("192.168.1.135"), 502), new MeterBusPacketSerializer(), new Logger());
+            var endpoint = new TcpEndpointBinding(new IPEndPoint(IPAddress.Parse("192.168.1.135"), 502), new MeterBusPacketSerializer(), new Logger());
 
             endpoint
                 .Stream
                 .Subscribe(subscriber);
 
-            //endpoint.Send(new ShortMeterBusPackage(ControlCommand.SND_NKE, 0x0a));
+            endpoint.Connect();
+
+            Thread.Sleep(500);
+
+            endpoint.Send(new ShortMeterBusPackage(ControlCommand.SND_NKE, 0x0a));
 
             //endpoint.Send(new ShortMeterBusPackage(ControlCommand.SND_UD, 0x0a)); // set address
 
-            endpoint.Send(new ShortMeterBusPackage(ControlCommand.REQ_UD2, 0x0a));
+            //endpoint.Send(new ShortMeterBusPackage(ControlCommand.REQ_UD2, 0x0a));
 
-            endpoint.Send(new ShortMeterBusPackage(ControlCommand.REQ_UD2, 0x0a));
+            //endpoint.Send(new ShortMeterBusPackage(ControlCommand.REQ_UD2, 0x0a));
 
             //endpoint.Send(new ShortMeterBusPackage(ControlCommand.REQ_UD2, 0x0a));
 

@@ -9,8 +9,8 @@ namespace System.Net.Bindings
     {
         IObservable<PacketStreamEvent> Stream { get; }
 
-        Task Send(INetworkPacket packet);
+        bool Send(INetworkPacket packet);
 
-        Task StartReceiving();
+        bool StartReceiving();
     }
 }
