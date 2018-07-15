@@ -1,7 +1,7 @@
-﻿using MeterBusLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Bindings.Serial;
 using System.IO.Ports;
 using System.Linq;
 using System.Net;
@@ -43,15 +43,15 @@ namespace ElfConsoleApplication
             var addresses = new byte[] { 0x0a, 0x0b };
             var parsed = new List<System.Net.Protocols.MeterBus.Responses.Base>();
 
-            using (var stream = new MeterBusStream(settings))
+            using (var stream = new SerialPortEndpointBinding(settings))
             {
                 foreach (byte address in addresses)
                 {
-                    stream.Write(new byte[] { 0x7b, address });
+                    //stream.Write(new byte[] { 0x7b, address });
 
-                    var buffer = stream.Read();
+                    //var buffer = stream.Read();
 
-                    parsed.Add(ResponseMessage.Parse(buffer));
+                    //parsed.Add(ResponseMessage.Parse(buffer));
                 }
             }
 

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeterBusLibrary", "MeterBusLibrary\MeterBusLibrary.csproj", "{5E4C2B3A-EC67-40AF-987C-F8A8C72E997D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElfConsoleApplication", "ElfConsoleApplication\ElfConsoleApplication.csproj", "{35410508-B7FD-45B1-8E2D-76C311B2130A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataExamples", "DataExamples", "{C960B35E-8CDD-4B0F-A232-B91C8411007C}"
@@ -18,9 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{0590D187-9
 		DataExamples\Docs\MBDOC48.PDF = DataExamples\Docs\MBDOC48.PDF
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Net.Bindings", "System.Net.Bindings\System.Net.Bindings.csproj", "{E58986B5-7F00-4EDF-A771-29D568137E95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Net.Bindings", "System.Net.Bindings\System.Net.Bindings.csproj", "{E58986B5-7F00-4EDF-A771-29D568137E95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Net.Protocols.MeterBus", "System.Net.Protocols.MeterBus\System.Net.Protocols.MeterBus.csproj", "{2AEEF95C-5337-4EAE-A636-0CF640855CF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Net.Protocols.MeterBus", "System.Net.Protocols.MeterBus\System.Net.Protocols.MeterBus.csproj", "{2AEEF95C-5337-4EAE-A636-0CF640855CF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.IO.Bindings", "System.IO.Bindings\System.IO.Bindings.csproj", "{3ED7DAD2-A960-4043-BCBB-477E2B86DEA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +28,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5E4C2B3A-EC67-40AF-987C-F8A8C72E997D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E4C2B3A-EC67-40AF-987C-F8A8C72E997D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E4C2B3A-EC67-40AF-987C-F8A8C72E997D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E4C2B3A-EC67-40AF-987C-F8A8C72E997D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{35410508-B7FD-45B1-8E2D-76C311B2130A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{35410508-B7FD-45B1-8E2D-76C311B2130A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35410508-B7FD-45B1-8E2D-76C311B2130A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,6 +40,10 @@ Global
 		{2AEEF95C-5337-4EAE-A636-0CF640855CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AEEF95C-5337-4EAE-A636-0CF640855CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AEEF95C-5337-4EAE-A636-0CF640855CF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED7DAD2-A960-4043-BCBB-477E2B86DEA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED7DAD2-A960-4043-BCBB-477E2B86DEA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED7DAD2-A960-4043-BCBB-477E2B86DEA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED7DAD2-A960-4043-BCBB-477E2B86DEA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
