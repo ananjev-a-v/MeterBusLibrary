@@ -51,9 +51,9 @@
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MeterBusLibrary\MeterBusLibrary.csproj">
-      <Project>{5e4c2b3a-ec67-40af-987c-f8a8c72e997d}</Project>
-      <Name>MeterBusLibrary</Name>
+    <ProjectReference Include="..\System.IO.Bindings\System.IO.Bindings.csproj">
+      <Project>{3ED7DAD2-A960-4043-BCBB-477E2B86DEA6}</Project>
+      <Name>System.IO.Bindings</Name>
     </ProjectReference>
     <ProjectReference Include="..\System.Net.Bindings\System.Net.Bindings.csproj">
       <Project>{E58986B5-7F00-4EDF-A771-29D568137E95}</Project>
