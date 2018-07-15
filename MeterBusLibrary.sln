@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Net.Protocols.MeterB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.IO.Bindings", "System.IO.Bindings\System.IO.Bindings.csproj", "{3ED7DAD2-A960-4043-BCBB-477E2B86DEA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Net.Protocols.MeterBus.Test", "System.Net.Protocols.MeterBus.Test\System.Net.Protocols.MeterBus.Test.csproj", "{D748D01A-0C21-4DFE-8FFE-23ECEAD4DBD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{3ED7DAD2-A960-4043-BCBB-477E2B86DEA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ED7DAD2-A960-4043-BCBB-477E2B86DEA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ED7DAD2-A960-4043-BCBB-477E2B86DEA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D748D01A-0C21-4DFE-8FFE-23ECEAD4DBD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D748D01A-0C21-4DFE-8FFE-23ECEAD4DBD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D748D01A-0C21-4DFE-8FFE-23ECEAD4DBD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D748D01A-0C21-4DFE-8FFE-23ECEAD4DBD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
