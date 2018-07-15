@@ -82,6 +82,8 @@ namespace System.Net.Bindings.Tcp
         {
             try
             {
+                _logger.Info($"Operation: '{e.LastOperation}' Status: '{e.SocketError}'", null);
+
                 switch (e.SocketError)
                 {
                     case SocketError.Success:
@@ -103,8 +105,6 @@ namespace System.Net.Bindings.Tcp
                             }
                         }
                         break;
-                    default:
-                        break;
                 }
             }
             catch (Exception ex)
@@ -123,6 +123,8 @@ namespace System.Net.Bindings.Tcp
         {
             try
             {
+                _logger.Info($"Operation: '{e.LastOperation}' Status: '{e.SocketError}'", null);
+
                 switch (e.SocketError)
                 {
                     case SocketError.Success:
@@ -148,8 +150,6 @@ namespace System.Net.Bindings.Tcp
                                     break;
                             }
                         }
-                        break;
-                    default:
                         break;
                 }
             }

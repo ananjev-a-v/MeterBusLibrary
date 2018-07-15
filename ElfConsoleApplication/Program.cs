@@ -21,7 +21,7 @@ namespace ElfConsoleApplication
 
             var endpoint = new TcpEndpointBinding(new IPEndPoint(IPAddress.Parse("192.168.1.135"), 502), new MeterBusPacketSerializer(), new Logger());
 
-            endpoint
+            var subscription = endpoint
                 .Stream
                 .Subscribe(subscriber);
 

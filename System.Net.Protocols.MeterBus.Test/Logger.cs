@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Net.Bindings;
 using System.Text;
 
-namespace ElfConsoleApplication
+namespace System.Net.Protocols.MeterBus.Test
 {
     public sealed class Logger : ITelemetryLogger
     {

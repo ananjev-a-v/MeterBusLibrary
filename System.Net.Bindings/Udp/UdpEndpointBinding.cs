@@ -68,6 +68,8 @@ namespace System.Net.Bindings.Udp
         {
             try
             {
+                _logger.Info($"Operation: '{e.LastOperation}' Status: '{e.SocketError}'", null);
+
                 switch (e.SocketError)
                 {
                     case SocketError.Success:
@@ -89,8 +91,6 @@ namespace System.Net.Bindings.Udp
                             }
                         }
                         break;
-                    default:
-                        break;
                 }
             }
             catch (Exception ex)
@@ -109,6 +109,8 @@ namespace System.Net.Bindings.Udp
         {
             try
             {
+                _logger.Info($"Operation: '{e.LastOperation}' Status: '{e.SocketError}'", null);
+
                 switch (e.SocketError)
                 {
                     case SocketError.Success:
@@ -129,8 +131,6 @@ namespace System.Net.Bindings.Udp
                                     break;
                             }
                         }
-                        break;
-                    default:
                         break;
                 }
             }
